@@ -33,9 +33,10 @@ next build picks up the change.
 
 ### Supported Ember versions
 
-CI starts at Ember 4.1 because older versions cannot be exercised: ember-source
-4.0 does not export `service` from `@ember/service`, and ember-cli 7 cannot build
-ember-source 3.28.
+Ember 4.1 is the floor because `refresh` and `refreshExternal` rely on
+`RouterService#refresh`, which landed there. CI can't go lower anyway:
+ember-source 4.0 does not export `service` from `@ember/service`, and ember-cli 7
+cannot build ember-source 3.28.
 
 ## Running the test application
 
