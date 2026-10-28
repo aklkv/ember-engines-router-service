@@ -44,6 +44,26 @@ infer for you:
 
 See [`test-app`](test-app) for a complete working setup.
 
+### Engines in a pnpm workspace
+
+`ember-engines` has `ember-source` as a peer dependency. If an engine is its own
+workspace package and doesn't list `ember-source`, pnpm installs that peer at the
+newest matching version, so an app on an older Ember ends up with two copies and
+routing into the engine fails with *"Assertion Failed: Expected route to have
+EngineInstance as owner"*.
+
+Either add the app's `ember-source` version to each engine's `devDependencies`,
+or install the engines into the app as injected dependencies so their peers
+resolve from the app:
+
+```json
+{
+  "dependenciesMeta": {
+    "my-engine": { "injected": true }
+  }
+}
+```
+
 ## Installation
 
 ```sh
